@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spin to win</title>
+    <style>
+        .spin-container {
+            position: relative;
+            /* width: 400px;
+            height: 400px; */
+
+            width: 100%; 
+        /* Set min-height to 100vh so the content will always fill the brower page, (the viewport) but could extend beyond. */
+        min-height: 100vh;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .wheel {
+            position: absolute;
+            /* left: 50%;
+            top: 50%; */
+            /* transform: translate(-50%, -50%); */
+            /* transform-origin: center center;  */
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .segment {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 150px 150px 0;
+            border-color: gray transparent transparent;
+            transform-origin: 50% 100%;
+            cursor: pointer; /* Add cursor pointer */
+        }
+
+        .segment:nth-child(even) {
+            border-color: black transparent transparent;
+        }
+
+        .pointer {
+            position: absolute;
+            /* top: calc(50% - 150px); /* Position at top of the wheel */
+            left: 120px; 
+            /* transform: translateX(-50%) rotate(0deg); Always point downwards */
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 20px solid red; /* Change color and size according to your preference */
+            z-index: 2; /* Ensure it's on top of the wheel */
+        }
+
+        .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-90deg); /* Rotate text */
+            font-size: 12px; /* Adjust font size */
+            color: white; /* Text color */
+            z-index: 1; /* Ensure it's below the pointer */
+        }
+
+        #spin-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #00f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="spin-container">
+        <div class="wheel" id="wheel">
+            <!-- Segments will be added dynamically with JavaScript -->
+        </div>
+        <div class="pointer" id="pointer"></div> <!-- Pointer element -->
+        <button id="spin-btn">Spin</button>
+    </div>
+
+    <script>
+        // Defines an array that contains objects representing different sections on the spin to win wheel
+        const sections = [
+            { title: "20% Discount", color: "#8a868d", weight: 1 },
+            { title: "Free Shipping", color: "rgb(213, 197, 106)", weight: 1 },
+            { title: "50% Discount", color: "#0000ff", weight: 1 },
+            { title: "111111111", color: "#0100ff", weight: 1 },
+            { title: "222222222", color: "#1000ff", weight: 1 },
+            { title: "333333333", color: "#0001ff", weight: 1 },
+            // Add more sections as needed
+        ];
+
+        // Gets HTML refrences to the IDs specified as wheel, pointer, and spin-btn
+        const wheel = document.getElementById('wheel');
+        const pointer = document.getElementById('pointer');
+        const spinBtn = document.getElementById('spin-btn');
+
+        // Create segments dynamically based on the number of sections
+
+        // Iterate through each element in the sections array
+        sections.forEach((section, index) => {
+            // Creates a div for each section
+            const segment = document.createElement('div');
+            // Adds the CSS class 'segment' to the div for the current section
+            segment.classList.add('segment');
+            // Sets the rotation angle to be positioned around the center of the spin to win wheel
+            segment.style.transform = `rotate(${index * (360 / sections.length)}deg)`;
+            // Create another div for the text
+            const text = document.createElement('div');
+            // Adds the CSS class text to the div for the current section
+            text.classList.add('text');
+            text.textContent = section.title;
+            text.style.transform = `translateY(-150px) rotate(-${index * (360 / sections.length)}deg)`; /* Adjust rotation */
+            segment.appendChild(text); /* Append text to segment */
+            wheel.appendChild(segment);
+        });
+
+        spinBtn.addEventListener('click', () => {
+            // Calculate total weight of all sections
+            // const totalWeight = sections.reduce((acc, section) => acc + section.weight, 0);
+            // // Generate a random number between 0 and totalWeight
+            // const randomNum = Math.random() * totalWeight;
+           debugger;
+            const randomNum = Math.random() * sections.length;
+            let cumulativeWeight = 0;
+
+            // Find the section corresponding to the random number
+            let selectedSection = sections[randomNum];
+            // for (const section of sections) {
+            //     cumulativeWeight += section.weight;
+            //     if (randomNum <= cumulativeWeight) {
+            //         selectedSection = section;
+            //         break;
+            //     }
+            // }
+
+            // Calculate rotation angle
+            const baseAngle = 360 / sections.length;
+            let rotation = baseAngle * sections.indexOf(selectedSection);
+
+            if (rotation < 20){
+                rotation = 300
+            }
+
+            // Apply rotation animation
+            wheel.style.transition = 'transform 3s ease-out';
+            wheel.style.transform = `rotate(${rotation}deg)`;
+            pointer.style.transform = `translateX(-50%) rotate(0deg)`; /* Always point downwards */
+
+            // Display the title
+            setTimeout(() => {
+                alert(selectedSection.title);
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

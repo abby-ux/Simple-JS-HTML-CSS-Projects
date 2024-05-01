@@ -1,0 +1,229 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
+.container{
+    /* We can set width to 100% because we want it to be the full width of the content block. */
+    width: 100%; 
+    /* Set min-height to 100vh so the content will always fill the brower page, (the viewport) but could extend beyond. */
+    min-height: 100vh;
+    background: linear-gradient(135deg, #153677, #4e085f);
+    padding: 10px;
+}
+
+.todo-app{
+    /* Make sure that the todo-app container fills the whole screen, or only 540 px wide maximum if
+    we are looking on a big screen (ex, computer monitor VS phone)   */
+    width: 100%;
+    max-width: 540px;
+    background: white;
+    /* margin: 100 top, auto left/right (to center horixontally), and 20 bottom */
+    margin: 100px auto 20px;
+    /* marging: space out of border content, padding: space inside border content */
+    padding: 40px 70px 30px;
+    border-radius: 10px;
+}
+
+.todo-app h2{
+    color: #002765;
+    /* flex: property is used to create a flexible container for aligning and distributing 
+    space among its children (flex items) along a single direction, to align icon and text */
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.todo-app h2 img {
+    width: 30px;
+    margin: 10px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #efeef0;
+    border-radius: 30px;
+    padding-left: 20px;
+    margin-bottom: 25px;
+}
+
+input {
+    /* makes the item flexible with a ratio of 1 for flex-grow, flex-shrink */
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    padding: 10px;
+}
+
+.todo-btn button {
+    border: none;
+    outline: none;
+    padding: 16px 50px;
+    background: #ff5945;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 40px;
+}
+
+ul li{
+    list-style: none;
+    font-size: 17px;
+    padding: 12px 8px 12px 50px;
+    user-select: none;
+    cursor: pointer;
+    position: relative;
+}
+
+ul li::before {
+    content: '';
+    position: absolute;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    background-image: url(images/unchecked.png);
+    background-size: cover;
+    background-position: center;
+    top: 12px;
+    left: 8px;
+}
+
+ul li.checked {
+    color: #555;
+    text-decoration: line-through;
+
+}
+ul li.checked::before{
+    background-image: url(images/checked.png);
+}
+
+ul li span {
+    position: absolute;
+    right: 0px;
+    top: 5px;
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+    color: #555;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+ul li span:hover {
+    background: #edeef0;
+
+}
+
+/* Style for the navbar */
+header {
+    background-color: rgb(0,0,0,.3); /* Background color of the navbar */
+    color: #fff; /* Text color */
+    padding: 10px 0; /* Padding to create space around the navbar */
+  }
+  
+  nav ul.navbar-list {
+    list-style-type: none; /* Remove bullet points from list */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+  }
+  
+  nav ul.navbar-list li {
+    display: inline-block; /* Display list items horizontally */
+    margin-right: 20px; /* Add spacing between list items */
+  }
+  
+  nav ul.navbar-list li:last-child {
+    margin-right: 0; /* Remove margin from the last list item */
+  }
+  
+  nav ul.navbar-list li a {
+    color: #fff; /* Text color of navbar links */
+    text-decoration: none; /* Remove underline from links */
+  }
+  
+  nav ul.navbar-list li a:hover {
+    text-decoration: underline; /* Underline links on hover */
+  }
+
+  nav ul.navbar-list li::before{
+    background: none;
+  }
+
+
+.quiz-box{
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    margin: 100px auto 0;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.quiz-box h1 {
+    font-size: 24px;
+    color: #001e4d;
+    font-weight: 600;
+    border: 1px solid #333;
+    padding-bottom: 30px;
+}
+
+.quiz {
+    padding: 20px 0;
+}
+
+.quix h2 {
+    font-size: 18px;
+    color: #001e4d;
+    font-weight: 600;
+}
+  
+.quiz-btn {
+    background: white;
+    color: #222;
+    font-weight: 500;
+    width: 100%;
+    border: 1px solid #222;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: left;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.quiz-btn:hover:not([disabled]) {
+    background: #222;
+    color: white;
+}
+
+.quiz-btn:disabled{
+    cursor: no-drop;
+}
+
+#next-btn{
+    background: #001e4d;
+    color: white;
+    font-weight: 500;
+    width: 150px;
+    border: 0;
+    padding: 10px;
+    margin: 20px auto 0;
+    border-radius: 4px;
+    cursor: pointer;
+    /* centers button */
+    /* display: block; */
+    display: none;
+}
+
+.correct {
+    background: #9aeabc;
+}
+.incorrect {
+    background: #ff9393;
+}
